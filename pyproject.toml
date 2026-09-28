@@ -1,0 +1,37 @@
+[project]
+name = "tts-quality-gate"
+version = "0.1.0"
+description = "Automated quality gate and evaluation harness for TTS model fine-tuning."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jiwer>=3.0.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.8.0"
+]
+
+[project.scripts]
+tts-quality-gate = "tts_quality_gate.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "N", "S", "B", "A", "C4", "PT", "SIM", "PTH", "RUF"]
+ignore = ["S101"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q --strict-markers"
